@@ -1,4 +1,4 @@
 # nike-backsever
-github PRO 계정을사야되는건가ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ
+jenkins 무중단배포 테스트중
 
 Jenkins + Docker + AWSEC2
