@@ -39,7 +39,7 @@ jobs:
       run: docker pull sukyu0919/nike
     
     - name: stop skrevolve.org:8080 api server
-      run: docker stop sukyu0919/nike
+      run: docker stop nike-backend
 
     - name: restart the sukyu0919/nike container
-      run: docker start sukyu0919/nike
+      run: docker start nike-backend
