@@ -35,9 +35,14 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: docker pull from dockerhub and stop/restart service
-      run:
-        docker stop sukyu0919/nike
-        docker rmi nike sukyu0919/nike
-        docker pull sukyu0919/nike
-        docker run -d --name nike -p 8080:8080 sukyu0919/nike
+    - name: stop skrevolve.org:8080 api server
+      run: docker stop sukyu0919/nike
+    
+    - name: remove docker image sukyu0919/nike
+      run: docker rmi nike sukyu0919/nike
+
+    - name: pull docker latest image sukyu0919/nike
+      run: docker pull sukyu0919/nike
+
+    - name: restart the sukyu0919/nike container
+      run: docker run -d --name nike -p 8080:8080 sukyu0919/nike
