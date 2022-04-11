@@ -26,7 +26,7 @@ jobs:
       run: mvn clean install
 
     - name: Build & push Docker image
-      uses:
+      uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: sukyu0919/nike
         tags: latest
