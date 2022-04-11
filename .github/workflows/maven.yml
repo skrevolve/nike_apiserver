@@ -24,3 +24,14 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean install
+
+    - name: Build & push Docker image
+      uses:
+      with:
+        image: sukyu0919/nike
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
