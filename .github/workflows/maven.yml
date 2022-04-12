@@ -35,6 +35,9 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+    - name: docker login
+      run: sudo docker login
+
     - name: pull docker latest image sukyu0919/nike from dockerhub
       run: sudo docker pull sukyu0919/nike
     
