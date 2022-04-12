@@ -36,13 +36,13 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: docker login
-      run: sudo docker login
+      run: ../docker_login.sh
 
     - name: pull docker latest image sukyu0919/nike from dockerhub
-      run: sudo docker pull sukyu0919/nike
+      run: ../docker_pull_image.sh
     
     - name: stop skrevolve.org:8080 api server
-      run: sudo docker stop nike-backend
+      run: ../docker_stop.sh
 
     - name: restart the sukyu0919/nike container
-      run: sudo docker start nike-backend
+      run: ../docker_start.sh
