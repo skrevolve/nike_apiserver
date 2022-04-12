@@ -39,7 +39,7 @@ jobs:
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
     - name: stop skrevolve.org:8080 api server
-      run: sudo docker stop nike-backend
+      run: sudo docker stop sukyu0919/nike:latest
 
     - name: delete legacy container
       run: sudo docker rm nike-backend
