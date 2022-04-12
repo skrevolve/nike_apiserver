@@ -36,7 +36,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: docker login
-      run: cat ~/docker_password.txt | docker login --username sukyu0919 --password-stdin
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
     - name: stop skrevolve.org:8080 api server
       run: sudo docker stop nike-backend
