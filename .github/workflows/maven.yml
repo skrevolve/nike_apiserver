@@ -36,13 +36,19 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: docker login
-      run: ../docker_login.sh
+      run: cat ~/docker_password.txt | docker login --username sukyu0919 --password-stdin
+
+    - name: stop skrevolve.org:8080 api server
+      run: sudo docker stop nike-backend
+
+    - name: delete legacy container
+      run: sudo docker rm nike-backend
+
+    - name: delete legacy image
+      run: sudo docker rmi sukyu0919/nike:latest
 
     - name: pull docker latest image sukyu0919/nike from dockerhub
-      run: ../docker_pull_image.sh
-    
-    - name: stop skrevolve.org:8080 api server
-      run: ../docker_stop.sh
+      run: sudo docker pull sukyu0919/nike:latest
 
-    - name: restart the sukyu0919/nike container
-      run: ../docker_start.sh
+    - name: restart the springboot-api-server
+      run: sudo docker run -d --name nike -p 8080:8080 sukyu0919/nike:latest
