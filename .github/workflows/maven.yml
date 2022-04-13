@@ -31,17 +31,17 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    name: Deploy
-    uses: appleboy/ssh-action@master
-    with:
-      host: ec2-15-164-219-31.ap-northeast-2.compute.amazonaws.com
-      username: ${{ secrets.AWS_USERNAME }}
-      password: ${{ secrets.AWS_PASSWORD }}
-      envs: GITHUB_SHA
-      script: |
-        docker stop nike-apiserver
-        docker rm -fv nike-apiserver
-        docker rmi sukyu0919/nike_apiserver
-        docker pull sukyu0919/nike_apiserver:${GITHUB_SHA::7}
-        docker tag sukyu0919/nike_apiserver:${GITHUB_SHA::7} nike_apiserver
-        docker run -d --name nike-apiserver -p 8080:8080 sukyu0919/nike_apiserver          
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ec2-15-164-219-31.ap-northeast-2.compute.amazonaws.com
+        username: ${{ secrets.AWS_USERNAME }}
+        password: ${{ secrets.AWS_PASSWORD }}
+        envs: GITHUB_SHA
+        script: |
+          docker stop nike-apiserver
+          docker rm -fv nike-apiserver
+          docker rmi sukyu0919/nike_apiserver
+          docker pull sukyu0919/nike_apiserver:${GITHUB_SHA::7}
+          docker tag sukyu0919/nike_apiserver:${GITHUB_SHA::7} nike_apiserver
+          docker run -d --name nike-apiserver -p 8080:8080 sukyu0919/nike_apiserver          
