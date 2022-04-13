@@ -10,10 +10,9 @@ on:
     branches: [ master ]
 
 jobs:
+
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 1.8
@@ -34,4 +33,16 @@ jobs:
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-
+  
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: self-hosted
+    steps:
+      - name: Docker run
+        run:
+          docker stop nike-apiserver
+          docker rm -fv nike-apiserver
+          docker rmi sukyu0919/nike_apiserver:latest
+          docker pull sukyu0919/nike_apiserver
+          docker run -d --name nike-apiserver -p 8080:8080 sukyu0919/nike_apiserver          
