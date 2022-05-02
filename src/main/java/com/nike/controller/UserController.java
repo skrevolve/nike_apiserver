@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @GetMapping("/test-docker")
     public String getData() {
-        return "Docker Deploy 배포 테스트 c9n";
+        return "Docker Deploy 배포 테스트 완료";
     }
 }
